@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>-Outlier-</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div>
+      {% if res %}
+        <h1>Results:</h1>
+        <table>
+        <tr>
+            <th></th>
+            <th>Lower Limit</th>
+            <th>Upper Limit</th>
+            <th>Boxplot</th>
+        </tr>
+        {% for col in res %}
+            <tr>
+            <td><input type="checkbox" name="selectedRows" value="{{ loop.index0 }}"></td>
+            <td>{{ col[0] }}</td>
+            <td>{{ col[1] }}</td>
+            <td><img src="{{ filename }}" height="300" width="300" alt="{{ col }} boxplot"></td>
+            </tr>
+        {% endfor %}
+        </table>
+      {% endif %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>-Outlier-</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </head>
+  <body>
+    <h1>Upload a CSV/Excel File</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name="file"><br><br>
+      <input type="submit" value="Upload">
+    </form>
+    <div>
+      <!DOCTYPE html>
+<html>
+  <head>
+    <title>CSV/Excel File Upload Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <form action="{{ url_for('results') }}" method="POST">
+      {% if dis %}
+        <h1>File upload results:</h1>
+        <table>
+          <tr>
+            <th>Select</th>
+            <th>Column Name</th>
+            <th>Unique Value Count</th>
+            <th>Unique Values (Displaying 5 Values)</th>
+          </tr>
+          {% for col in dis %}
+            <tr>
+              <td><input type="checkbox" name="columns[]" value="{{ col }}"></td>
+              <td>{{ col }}</td>
+              <td>{{ uniq1[dis.index(col)] }}</td>
+              <td>{{ uniq2[dis.index(col)] }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+        <button type="submit">Get Results</button>
+      {% else %}
+        <h1>No file uploaded.</h1>
+      {% endif %}
+    </form>
+  </body>
+</html>
