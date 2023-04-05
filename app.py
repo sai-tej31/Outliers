@@ -38,6 +38,7 @@ def upload():
 def results():
     global data
     res = []
+    filenames = []
     selected_rows = request.form.getlist('columns[]')
     for col in selected_rows:
         res.append(find_limits(data,col))
@@ -46,14 +47,14 @@ def results():
             ax.boxplot(data[col], vert=False)
             ax.set_title(col)
             
-            filename = col + '_boxplot.png'
+            filename = 'temp'+str(len(filenames)+1) + '_boxplot.png'
             filepath = os.path.join(app.static_folder, 'Images', filename)
             fig.savefig(filepath, dpi=150, bbox_inches='tight')
             plt.close(fig)
             
-            filename = '/static/Images/' + filename
+            filenames.append('/static/Images/' + filename)
             
-    return render_template("results.html",res = res,filename=filename)
+    return render_template("results.html",res = res,filenames=filenames)
 
 
 if __name__ == '__main__':

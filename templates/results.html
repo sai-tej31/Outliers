@@ -20,7 +20,7 @@
             <td><input type="checkbox" name="selectedRows" value="{{ loop.index0 }}"></td>
             <td>{{ col[0] }}</td>
             <td>{{ col[1] }}</td>
-            <td><img src="{{ filename }}" height="300" width="300" alt="{{ col }} boxplot"></td>
+            <td><img src="{{ filenames[res.index(col)] }}" height="300" width="300" alt="{{ col }} boxplot"></td>
             </tr>
         {% endfor %}
         </table>
